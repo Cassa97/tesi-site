@@ -127,7 +127,7 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-1 rounded-xl border border-white/10 bg-white/5 p-1">
-            <Link
+            <a
               href={switchToIt}
               className={`rounded-lg px-3 py-1 text-xs font-semibold no-underline ${
                 lang === "it"
@@ -136,9 +136,9 @@ export default function Header() {
               }`}
             >
               IT
-            </Link>
+            </a>
 
-            <Link
+            <a
               href={switchToEn}
               className={`rounded-lg px-3 py-1 text-xs font-semibold no-underline ${
                 lang === "en"
@@ -147,7 +147,7 @@ export default function Header() {
               }`}
             >
               EN
-            </Link>
+            </a>
           </div>
         </div>
       </div>
