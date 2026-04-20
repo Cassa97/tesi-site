@@ -1,8 +1,7 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
-
-const BASE_PATH = "/tesi-site";
 
 function buildProposalMailto(lang = "it") {
   const subject = lang === "en" ? "Thesis proposal" : "Proposta tesi";
@@ -63,14 +62,17 @@ function buildProposalMailto(lang = "it") {
 
 export default function Header() {
   const [lang, setLang] = useState("it");
-  const [isOnTesiPage, setIsOnTesiPage] = useState(false);
+  const [currentPath, setCurrentPath] = useState("/");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     setLang(params.get("lang") === "en" ? "en" : "it");
 
-    const path = window.location.pathname;
-    setIsOnTesiPage(path.includes("/tesi"));
+    let path = window.location.pathname;
+
+    // se sei in locale con basePath o online su GitHub Pages
+    // manteniamo il path corrente così com'è
+    setCurrentPath(path);
   }, []);
 
   const siteTitle =
@@ -85,27 +87,18 @@ export default function Header() {
   const proposeLabel =
     lang === "en" ? "Propose your topic" : "Proponi il tuo tema";
 
-  const homeHref = `${BASE_PATH}/?lang=${lang}`;
-  const thesisHref = `${BASE_PATH}/tesi?lang=${lang}`;
+  const homeHref = `${currentPath.includes("/tesi") ? currentPath.replace("/tesi", "") || "/" : currentPath}?lang=${lang}`;
+  const thesisHref = `${currentPath.includes("/tesi") ? currentPath : `${currentPath.replace(/\/$/, "")}/tesi`}?lang=${lang}`;
 
-  const switchToIt = isOnTesiPage
-    ? `${BASE_PATH}/tesi?lang=it`
-    : `${BASE_PATH}/?lang=it`;
-
-  const switchToEn = isOnTesiPage
-    ? `${BASE_PATH}/tesi?lang=en`
-    : `${BASE_PATH}/?lang=en`;
+  const switchToIt = `${currentPath}?lang=it`;
+  const switchToEn = `${currentPath}?lang=en`;
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <a href={homeHref} className="no-underline">
+        <Link href={homeHref} className="no-underline">
           <div className="flex items-center gap-2">
-            <img
-              src={`${BASE_PATH}/Bandiera_Bianco.png`}
-              alt="Politecnico di Milano"
-              className="h-10 w-auto"
-            />
+            <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-indigo-400 to-fuchsia-400" />
             <div>
               <div className="text-sm font-semibold leading-tight">
                 {siteTitle}
@@ -113,7 +106,7 @@ export default function Header() {
               <div className="text-xs text-slate-300">{siteSubtitle}</div>
             </div>
           </div>
-        </a>
+        </Link>
 
         <div className="flex items-center gap-3">
           <nav className="flex items-center gap-3 text-sm">
