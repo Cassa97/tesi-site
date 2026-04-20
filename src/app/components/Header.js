@@ -63,14 +63,21 @@ function buildProposalMailto(lang = "it") {
 
 export default function Header() {
   const [lang, setLang] = useState("it");
-  const [currentPath, setCurrentPath] = useState(`${BASE_PATH}/`);
+  const [isOnTesiPage, setIsOnTesiPage] = useState(false);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setLang(params.get("lang") === "en" ? "en" : "it");
+    const updateFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      setLang(params.get("lang") === "en" ? "en" : "it");
 
-    const path = window.location.pathname || `${BASE_PATH}/`;
-    setCurrentPath(path);
+      const path = window.location.pathname;
+      setIsOnTesiPage(path.includes("/tesi"));
+    };
+
+    updateFromUrl();
+
+    window.addEventListener("popstate", updateFromUrl);
+    return () => window.removeEventListener("popstate", updateFromUrl);
   }, []);
 
   const siteTitle =
@@ -88,8 +95,13 @@ export default function Header() {
   const homeHref = `${BASE_PATH}/?lang=${lang}`;
   const thesisHref = `${BASE_PATH}/tesi?lang=${lang}`;
 
-  const switchToIt = `${currentPath}?lang=it`;
-  const switchToEn = `${currentPath}?lang=en`;
+  const switchToIt = isOnTesiPage
+    ? `${BASE_PATH}/tesi?lang=it`
+    : `${BASE_PATH}/?lang=it`;
+
+  const switchToEn = isOnTesiPage
+    ? `${BASE_PATH}/tesi?lang=en`
+    : `${BASE_PATH}/?lang=en`;
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur">
