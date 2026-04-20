@@ -69,8 +69,8 @@ export default function Header() {
     setLang(params.get("lang") === "en" ? "en" : "it");
   }, []);
 
-  const homeHref = `/?lang=${lang}`;
-  const thesisHref = `/tesi?lang=${lang}`;
+  const homeHref = `/tesi-site/?lang=${lang}`;
+  const thesisHref = `/tesi-site/tesi?lang=${lang}`;
 
   const siteTitle =
     lang === "en" ? "Thesis Opportunities" : "Proposte di Tesi";
@@ -117,8 +117,8 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-1 rounded-xl border border-white/10 bg-white/5 p-1">
-            <Link
-              href="/?lang=it"
+            <a
+              href="/tesi-site/?lang=it"
               className={`rounded-lg px-3 py-1 text-xs font-semibold no-underline ${
                 lang === "it"
                   ? "bg-white text-slate-950"
@@ -126,10 +126,10 @@ export default function Header() {
               }`}
             >
               IT
-            </Link>
+            </a>
 
-            <Link
-              href="/?lang=en"
+            <a
+              href="/tesi-site/?lang=en"
               className={`rounded-lg px-3 py-1 text-xs font-semibold no-underline ${
                 lang === "en"
                   ? "bg-white text-slate-950"
@@ -137,7 +137,7 @@ export default function Header() {
               }`}
             >
               EN
-            </Link>
+            </a>
           </div>
         </div>
       </div>
