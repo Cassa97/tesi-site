@@ -62,17 +62,14 @@ function buildProposalMailto(lang = "it") {
 
 export default function Header() {
   const [lang, setLang] = useState("it");
-  const [currentPath, setCurrentPath] = useState("/");
+  const [isOnTesiPage, setIsOnTesiPage] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     setLang(params.get("lang") === "en" ? "en" : "it");
 
-    let path = window.location.pathname;
-
-    // se sei in locale con basePath o online su GitHub Pages
-    // manteniamo il path corrente così com'è
-    setCurrentPath(path);
+    const path = window.location.pathname;
+    setIsOnTesiPage(path.includes("/tesi"));
   }, []);
 
   const siteTitle =
@@ -87,11 +84,11 @@ export default function Header() {
   const proposeLabel =
     lang === "en" ? "Propose your topic" : "Proponi il tuo tema";
 
-  const homeHref = `${currentPath.includes("/tesi") ? currentPath.replace("/tesi", "") || "/" : currentPath}?lang=${lang}`;
-  const thesisHref = `${currentPath.includes("/tesi") ? currentPath : `${currentPath.replace(/\/$/, "")}/tesi`}?lang=${lang}`;
+  const homeHref = `/?lang=${lang}`;
+  const thesisHref = `/tesi?lang=${lang}`;
 
-  const switchToIt = `${currentPath}?lang=it`;
-  const switchToEn = `${currentPath}?lang=en`;
+  const switchToIt = isOnTesiPage ? `/tesi?lang=it` : `/?lang=it`;
+  const switchToEn = isOnTesiPage ? `/tesi?lang=en` : `/?lang=en`;
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur">
@@ -101,7 +98,7 @@ export default function Header() {
             <img
               src="/tesi-site/Bandiera_Bianco.png"
               alt="Politecnico di Milano"
-              className="h-8 w-auto"
+              className="h-12 w-auto"
             />
             <div>
               <div className="text-sm font-semibold leading-tight">
@@ -114,12 +111,12 @@ export default function Header() {
 
         <div className="flex items-center gap-3">
           <nav className="flex items-center gap-3 text-sm">
-            <a
+            <Link
               className="no-underline text-slate-200 hover:text-white"
               href={thesisHref}
             >
               {thesisLabel}
-            </a>
+            </Link>
 
             <a
               href={buildProposalMailto(lang)}
@@ -130,7 +127,7 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-1 rounded-xl border border-white/10 bg-white/5 p-1">
-            <a
+            <Link
               href={switchToIt}
               className={`rounded-lg px-3 py-1 text-xs font-semibold no-underline ${
                 lang === "it"
@@ -139,9 +136,9 @@ export default function Header() {
               }`}
             >
               IT
-            </a>
+            </Link>
 
-            <a
+            <Link
               href={switchToEn}
               className={`rounded-lg px-3 py-1 text-xs font-semibold no-underline ${
                 lang === "en"
@@ -150,7 +147,7 @@ export default function Header() {
               }`}
             >
               EN
-            </a>
+            </Link>
           </div>
         </div>
       </div>
