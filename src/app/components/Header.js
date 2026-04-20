@@ -4,8 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 function buildProposalMailto(lang = "it") {
-  const subject =
-    lang === "en" ? "Thesis proposal" : "Proposta tesi";
+  const subject = lang === "en" ? "Thesis proposal" : "Proposta tesi";
 
   const body =
     lang === "en"
@@ -63,14 +62,18 @@ function buildProposalMailto(lang = "it") {
 
 export default function Header() {
   const [lang, setLang] = useState("it");
+  const [currentPath, setCurrentPath] = useState("/");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     setLang(params.get("lang") === "en" ? "en" : "it");
-  }, []);
 
-  const homeHref = `/tesi-site/?lang=${lang}`;
-  const thesisHref = `/tesi-site/tesi?lang=${lang}`;
+    let path = window.location.pathname;
+
+    // se sei in locale con basePath o online su GitHub Pages
+    // manteniamo il path corrente così com'è
+    setCurrentPath(path);
+  }, []);
 
   const siteTitle =
     lang === "en" ? "Thesis Opportunities" : "Proposte di Tesi";
@@ -83,6 +86,12 @@ export default function Header() {
 
   const proposeLabel =
     lang === "en" ? "Propose your topic" : "Proponi il tuo tema";
+
+  const homeHref = `${currentPath.includes("/tesi") ? currentPath.replace("/tesi", "") || "/" : currentPath}?lang=${lang}`;
+  const thesisHref = `${currentPath.includes("/tesi") ? currentPath : `${currentPath.replace(/\/$/, "")}/tesi`}?lang=${lang}`;
+
+  const switchToIt = `${currentPath}?lang=it`;
+  const switchToEn = `${currentPath}?lang=en`;
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur">
@@ -101,12 +110,12 @@ export default function Header() {
 
         <div className="flex items-center gap-3">
           <nav className="flex items-center gap-3 text-sm">
-            <Link
+            <a
               className="no-underline text-slate-200 hover:text-white"
               href={thesisHref}
             >
               {thesisLabel}
-            </Link>
+            </a>
 
             <a
               href={buildProposalMailto(lang)}
@@ -118,7 +127,7 @@ export default function Header() {
 
           <div className="flex items-center gap-1 rounded-xl border border-white/10 bg-white/5 p-1">
             <a
-              href="/tesi-site/?lang=it"
+              href={switchToIt}
               className={`rounded-lg px-3 py-1 text-xs font-semibold no-underline ${
                 lang === "it"
                   ? "bg-white text-slate-950"
@@ -129,7 +138,7 @@ export default function Header() {
             </a>
 
             <a
-              href="/tesi-site/?lang=en"
+              href={switchToEn}
               className={`rounded-lg px-3 py-1 text-xs font-semibold no-underline ${
                 lang === "en"
                   ? "bg-white text-slate-950"
