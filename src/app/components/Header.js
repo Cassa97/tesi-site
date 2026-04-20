@@ -98,7 +98,11 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link href={homeHref} className="no-underline">
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-indigo-400 to-fuchsia-400" />
+            <img
+              src="/tesi-site/Bandiera_Bianco.png"
+              alt="Politecnico di Milano"
+              className="h-8 w-auto"
+            />
             <div>
               <div className="text-sm font-semibold leading-tight">
                 {siteTitle}
