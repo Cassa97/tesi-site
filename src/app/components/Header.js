@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const BASE_PATH = "/tesi-site";
 
@@ -63,19 +63,21 @@ function buildProposalMailto(lang = "it") {
 
 export default function Header() {
   const [lang, setLang] = useState("it");
-  const [isOnTesiPage, setIsOnTesiPage] = useState(false);
+  const [currentPath, setCurrentPath] = useState(`${BASE_PATH}/`);
+  const [currentSearch, setCurrentSearch] = useState("");
 
   useEffect(() => {
     const updateFromUrl = () => {
-      const params = new URLSearchParams(window.location.search);
-      setLang(params.get("lang") === "en" ? "en" : "it");
+      const path = window.location.pathname || `${BASE_PATH}/`;
+      const search = window.location.search || "";
+      const params = new URLSearchParams(search);
 
-      const path = window.location.pathname;
-      setIsOnTesiPage(path.includes("/tesi"));
+      setCurrentPath(path);
+      setCurrentSearch(search);
+      setLang(params.get("lang") === "en" ? "en" : "it");
     };
 
     updateFromUrl();
-
     window.addEventListener("popstate", updateFromUrl);
     return () => window.removeEventListener("popstate", updateFromUrl);
   }, []);
@@ -95,13 +97,17 @@ export default function Header() {
   const homeHref = `${BASE_PATH}/?lang=${lang}`;
   const thesisHref = `${BASE_PATH}/tesi?lang=${lang}`;
 
-  const switchToIt = isOnTesiPage
-    ? `${BASE_PATH}/tesi?lang=it`
-    : `${BASE_PATH}/?lang=it`;
+  const buildLangHref = useMemo(() => {
+    return (targetLang) => {
+      const params = new URLSearchParams(currentSearch);
+      params.set("lang", targetLang);
+      const query = params.toString();
+      return `${currentPath}${query ? `?${query}` : ""}`;
+    };
+  }, [currentPath, currentSearch]);
 
-  const switchToEn = isOnTesiPage
-    ? `${BASE_PATH}/tesi?lang=en`
-    : `${BASE_PATH}/?lang=en`;
+  const switchToIt = buildLangHref("it");
+  const switchToEn = buildLangHref("en");
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur">
@@ -111,7 +117,7 @@ export default function Header() {
             <img
               src={`${BASE_PATH}/Bandiera_Bianco.png`}
               alt="Politecnico di Milano"
-              className="h-10 w-auto"
+              className="h-16 w-auto"
             />
             <div>
               <div className="text-sm font-semibold leading-tight">
