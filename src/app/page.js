@@ -1,12 +1,17 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { translations } from "@/lib/translations";
 
 export default function HomePage() {
-  const searchParams = useSearchParams();
-  const lang = searchParams.get("lang") === "en" ? "en" : "it";
+  const [lang, setLang] = useState("it");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setLang(params.get("lang") === "en" ? "en" : "it");
+  }, []);
+
   const t = translations[lang];
 
   return (

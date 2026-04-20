@@ -1,10 +1,14 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
-  const searchParams = useSearchParams();
-  const lang = searchParams.get("lang") === "en" ? "en" : "it";
+  const [lang, setLang] = useState("it");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setLang(params.get("lang") === "en" ? "en" : "it");
+  }, []);
 
   return (
     <footer className="border-t border-white/10">

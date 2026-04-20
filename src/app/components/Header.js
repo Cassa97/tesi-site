@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 function buildProposalMailto(lang = "it") {
   const subject =
@@ -62,8 +62,12 @@ function buildProposalMailto(lang = "it") {
 }
 
 export default function Header() {
-  const searchParams = useSearchParams();
-  const lang = searchParams.get("lang") === "en" ? "en" : "it";
+  const [lang, setLang] = useState("it");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setLang(params.get("lang") === "en" ? "en" : "it");
+  }, []);
 
   const homeHref = `/?lang=${lang}`;
   const thesisHref = `/tesi?lang=${lang}`;
