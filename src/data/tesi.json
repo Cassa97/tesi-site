@@ -1,0 +1,104 @@
+[
+  {
+    "id": "ai-001",
+    "titolo": {
+      "it": "Analisi di testi con NLP per supporto alla didattica",
+      "en": "Text analysis with NLP for educational support"
+    },
+    "area": {
+      "it": "AI / NLP",
+      "en": "AI / NLP"
+    },
+    "livello": {
+      "it": "Triennale o Magistrale",
+      "en": "Bachelor or Master"
+    },
+    "tags": ["NLP", "Python", "LLM"],
+    "descrizioneBreve": {
+      "it": "Progetto su classificazione e riassunto di documenti con tecniche NLP moderne.",
+      "en": "Project on document classification and summarization using modern NLP techniques."
+    },
+    "descrizioneCompleta": {
+      "it": "Obiettivo: esplorare tecniche NLP per organizzare, classificare e riassumere testi. Output: prototipo software, confronto tra approcci e breve report finale.",
+      "en": "Goal: explore NLP techniques to organize, classify, and summarize texts. Output: software prototype, comparison of approaches, and a short final report."
+    },
+    "requisiti": {
+      "it": ["Python base", "Interesse per AI/NLP"],
+      "en": ["Basic Python", "Interest in AI/NLP"]
+    },
+    "modalita": {
+      "it": "Tesi sperimentale con prototipo software",
+      "en": "Experimental thesis with software prototype"
+    },
+    "docenteNome": "Prof. Rossi",
+    "docenteEmail": "prof.rossi@univ.it"
+  },
+  {
+    "id": "web-002",
+    "titolo": {
+      "it": "Portale web per gestione proposte di tesi",
+      "en": "Web portal for thesis opportunities management"
+    },
+    "area": {
+      "it": "Web",
+      "en": "Web"
+    },
+    "livello": {
+      "it": "Magistrale",
+      "en": "Master"
+    },
+    "tags": ["Next.js", "UI", "GitHub"],
+    "descrizioneBreve": {
+      "it": "Sito pubblico con filtri e workflow di candidatura via email.",
+      "en": "Public website with filters and an email-based application workflow."
+    },
+    "descrizioneCompleta": {
+      "it": "Obiettivo: creare un portale consultabile dagli studenti con ricerca, filtri e pagine dettaglio. Candidatura via email precompilata. Possibili estensioni future: form, dashboard e backoffice.",
+      "en": "Goal: create a portal for students with search, filters, and detail pages. Application via pre-filled email. Possible future extensions: form, dashboard, and back office."
+    },
+    "requisiti": {
+      "it": ["HTML/CSS", "JavaScript base"],
+      "en": ["HTML/CSS", "Basic JavaScript"]
+    },
+    "modalita": {
+      "it": "Tesi progettuale con sviluppo web",
+      "en": "Project-based thesis with web development"
+    },
+    "docenteNome": "Prof.ssa Bianchi",
+    "docenteEmail": "prof.bianchi@univ.it"
+  },
+  {
+    "id": "sec-003",
+    "titolo": {
+      "it": "Analisi sicurezza applicazioni web",
+      "en": "Security analysis of web applications"
+    },
+    "area": {
+      "it": "Cybersecurity",
+      "en": "Cybersecurity"
+    },
+    "livello": {
+      "it": "Magistrale",
+      "en": "Master"
+    },
+    "tags": ["OWASP", "Web", "Testing"],
+    "descrizioneBreve": {
+      "it": "Valutazione vulnerabilità e mitigazioni in un'applicazione demo.",
+      "en": "Assessment of vulnerabilities and mitigations in a demo application."
+    },
+    "descrizioneCompleta": {
+      "it": "Studio e test di vulnerabilità comuni su applicazioni web, con redazione di report e proposta di remediation. Possibile focus su OWASP Top 10 e strumenti di security testing.",
+      "en": "Study and testing of common vulnerabilities in web applications, including reporting and remediation proposals. Possible focus on the OWASP Top 10 and security testing tools."
+    },
+    "requisiti": {
+      "it": ["Basi reti", "Interesse per sicurezza"],
+      "en": ["Networking basics", "Interest in security"]
+    },
+    "modalita": {
+      "it": "Tesi sperimentale",
+      "en": "Experimental thesis"
+    },
+    "docenteNome": "Prof. Verdi",
+    "docenteEmail": "prof.verdi@univ.it"
+  }
+]
