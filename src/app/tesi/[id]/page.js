@@ -6,10 +6,23 @@ export function generateStaticParams() {
   return getAllTesi().map((t) => ({ id: t.id }));
 }
 
-export default async function TesiDetailPage({ params, searchParams }) {
+function tr(value, lang = "it") {
+  if (value == null) return "";
+  if (typeof value === "string") return value;
+  return value[lang] || value.it || "";
+}
+
+function trList(value, lang = "it") {
+  if (!value) return [];
+  if (Array.isArray(value)) return value;
+  return value[lang] || value.it || [];
+}
+
+export default async function TesiDetailPage({ params }) {
   const resolvedParams = await params;
-  const resolvedSearchParams = await searchParams;
-  const lang = resolvedSearchParams?.lang === "en" ? "en" : "it";
+
+  // per static export teniamo una lingua fissa qui
+  const lang = "it";
   const tText = translations[lang];
 
   const t = getTesiById(resolvedParams.id);
@@ -20,7 +33,7 @@ export default async function TesiDetailPage({ params, searchParams }) {
         <div className="text-lg font-semibold">{tText.thesisNotFound}</div>
         <p className="mt-2 text-sm text-slate-300">{tText.thesisNotFoundText}</p>
         <Link
-          href={`/tesi?lang=${lang}`}
+          href="/tesi"
           className="mt-4 inline-block no-underline rounded-2xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10"
         >
           {tText.backToList}
@@ -29,10 +42,17 @@ export default async function TesiDetailPage({ params, searchParams }) {
     );
   }
 
+  const areaValue = tr(t.area, lang);
+  const livello = tr(t.livello, lang);
+  const titolo = tr(t.titolo, lang);
+  const descrizione = tr(t.descrizioneCompleta, lang) || tr(t.descrizioneBreve, lang);
+  const requisiti = trList(t.requisiti, lang);
+  const modalita = tr(t.modalita, lang);
+
   return (
     <div>
       <Link
-        href={`/tesi?lang=${lang}`}
+        href="/tesi"
         className="no-underline text-sm text-slate-300 hover:text-white"
       >
         {tText.backToList}
@@ -42,15 +62,15 @@ export default async function TesiDetailPage({ params, searchParams }) {
         <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <div>
             <div className="text-xs text-slate-400">
-              {t.area} • {t.livello} • ID: {t.id}
+              {areaValue} • {livello} • ID: {t.id}
             </div>
             <h1 className="mt-1 text-2xl font-semibold tracking-tight md:text-3xl">
-              {t.titolo}
+              {titolo}
             </h1>
           </div>
 
           <a
-            href={buildMailto(t)}
+            href={buildMailto(t, lang)}
             className="no-underline rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-slate-950 hover:bg-slate-200"
           >
             {tText.applyEmail}
@@ -61,20 +81,20 @@ export default async function TesiDetailPage({ params, searchParams }) {
           <div className="md:col-span-2">
             <h2 className="text-sm font-semibold text-white">{tText.description}</h2>
             <p className="mt-2 whitespace-pre-line text-sm text-slate-200">
-              {t.descrizioneCompleta || t.descrizioneBreve}
+              {descrizione}
             </p>
 
             <h2 className="mt-6 text-sm font-semibold text-white">{tText.requirements}</h2>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-200">
-              {(t.requisiti || []).map((r) => (
+              {requisiti.map((r) => (
                 <li key={r}>{r}</li>
               ))}
             </ul>
 
-            {t.modalita && (
+            {modalita && (
               <>
                 <h2 className="mt-6 text-sm font-semibold text-white">{tText.mode}</h2>
-                <p className="mt-2 text-sm text-slate-200">{t.modalita}</p>
+                <p className="mt-2 text-sm text-slate-200">{modalita}</p>
               </>
             )}
           </div>
