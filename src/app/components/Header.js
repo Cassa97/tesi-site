@@ -83,10 +83,13 @@ export default function Header() {
   }, []);
 
   const siteTitle =
-    lang === "en" ? "Thesis Opportunities" : "Proposte di Tesi";
-
+    lang === "en"
+      ? "Thesis Opportunities - Research Group"
+      : "Proposte di tesi - Gruppo di ricerca";
   const siteSubtitle =
-    lang === "en" ? "public catalog" : "catalogo pubblico";
+    lang === "en"
+      ? "Prof. Pavan, Prof. Mirarchi, Dr.-Ing. Cassandro (DABC, Politecnico di Milano)"
+      : "Prof. Pavan, Prof. Mirarchi, Dr.-Ing. Cassandro (DABC, Politecnico di Milano)";
 
   const thesisLabel =
     lang === "en" ? "Thesis list" : "Lista tesi";

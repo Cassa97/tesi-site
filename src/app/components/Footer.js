@@ -15,8 +15,8 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-8 text-xs text-slate-400">
         © {new Date().getFullYear()} —{" "}
         {lang === "en"
-          ? "Thesis Opportunities. Public for students."
-          : "Proposte di Tesi. Pubblico per studenti."}
+          ? "Thesis Opportunities - Research Group (Prof. Pavan, Prof. Mirarchi, Dr.-Ing. Cassandro). Public for students."
+          : "Proposte di Tesi - Gruppo di ricerca (Prof. Pavan, Prof. Mirarchi, Dr.-Ing. Cassandro). Pubblico per studenti."}
       </div>
     </footer>
   );

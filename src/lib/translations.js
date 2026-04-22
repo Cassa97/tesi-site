@@ -1,26 +1,36 @@
 export const translations = {
   it: {
-    siteTitle: "Proposte di Tesi",
-    siteSubtitle: "catalogo pubblico",
+    siteTitle: "Proposte di tesi - Gruppo di ricerca",
+    siteSubtitle:
+      "Prof. Pavan, Prof. Mirarchi, Dr.-Ing. Cassandro (DABC, Politecnico di Milano)",
+
     navList: "Lista tesi",
     navPropose: "Proponi il tuo tema",
-    heroTitle1: "Catalogo pubblico",
-    heroTitle2: "proposte di tesi",
+
+    heroTitle1: "Proposte di tesi",
+    heroTitle2: "del gruppo di ricerca",
+
     heroText:
-      "Esplora le proposte disponibili, consulta i dettagli e invia la tua candidatura via email direttamente dalla scheda della tesi.",
+      "Questa pagina raccoglie le proposte di tesi seguite dal Prof. Pavan, Prof. Mirarchi e Dr.-Ing. Cassandro (DABC, Politecnico di Milano). Esplora le tesi disponibili, consulta i dettagli e invia la tua candidatura via email.",
+
     goToList: "Vai alla lista tesi",
 
     cardBrowseTitle: "Esplora le proposte",
-    cardBrowseText: "Consulta le tesi disponibili e filtra per area di interesse.",
+    cardBrowseText:
+      "Consulta le tesi disponibili all’interno del nostro gruppo di ricerca.",
 
     cardApplyTitle: "Candidati facilmente",
-    cardApplyText: "Ogni proposta include un pulsante per inviare una mail già precompilata.",
+    cardApplyText:
+      "Ogni proposta include un pulsante per contattare direttamente il docente via email.",
 
     cardProposeTitle: "Hai già un’idea?",
-    cardProposeText: "Puoi proporre un tuo tema scrivendo direttamente via email.",
+    cardProposeText:
+      "Puoi proporre un tuo tema da sviluppare nell’ambito delle attività de gruppo di ricerca.",
 
     thesisTitle: "Proposte di tesi",
-    thesisSubtitle: "Filtra e cerca. Per candidarti, usa “Candidati via email”.",
+    thesisSubtitle:
+      "Proposte seguite dal gruppo di ricerca. Per candidarti, usa “Candidati via email”.",
+
     search: "Ricerca",
     searchPlaceholder: "es. NLP, Web, Python, Next.js...",
     area: "Area",
@@ -43,27 +53,37 @@ export const translations = {
   },
 
   en: {
-    siteTitle: "Thesis Opportunities",
-    siteSubtitle: "public catalog",
+    siteTitle: "Thesis Opportunities - Research Group",
+    siteSubtitle:
+      "Prof. Pavan, Prof. Mirarchi, Dr.-Ing. Cassandro (DABC, Politecnico di Milano)",
+
     navList: "Thesis list",
     navPropose: "Propose your topic",
-    heroTitle1: "Public catalog",
-    heroTitle2: "thesis opportunities",
+
+    heroTitle1: "Thesis opportunities",
+    heroTitle2: "within our research group",
+
     heroText:
-      "Browse available thesis topics, check the details, and send your application via email directly from each thesis page.",
+      "This page lists thesis opportunities supervised by Prof. Pavan, Prof. Mirarchi and Dr.-Ing. Cassandro (DABC, Politecnico di Milano). Browse available topics and apply via email.",
+
     goToList: "Go to thesis list",
 
     cardBrowseTitle: "Browse proposals",
-    cardBrowseText: "Explore available theses and filter by area of interest.",
+    cardBrowseText:
+      "Explore thesis opportunities within our research group.",
 
     cardApplyTitle: "Apply easily",
-    cardApplyText: "Each proposal includes a button to open a pre-filled email.",
+    cardApplyText:
+      "Each proposal includes a button to directly contact the supervisor via email.",
 
     cardProposeTitle: "Already have an idea?",
-    cardProposeText: "You can propose your own topic by sending an email directly.",
+    cardProposeText:
+      "You can propose your own topic related to our research group activities.",
 
     thesisTitle: "Thesis opportunities",
-    thesisSubtitle: "Filter and search. To apply, use “Apply via email”.",
+    thesisSubtitle:
+      "Opportunities supervised by our research group. Use “Apply via email” to contact the supervisor.",
+
     search: "Search",
     searchPlaceholder: "e.g. NLP, Web, Python, Next.js...",
     area: "Area",
