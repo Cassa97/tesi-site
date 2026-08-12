@@ -19,18 +19,60 @@ export function getTesiById(id) {
 export function getUniqueAree(lang = "it") {
   const first = lang === "en" ? "All" : "Tutte";
   const aree = new Set(getAllTesi().map((t) => tr(t.area, lang)));
-  return [first, ...Array.from(aree).sort((a, b) => a.localeCompare(b))];
+
+  return [
+    first,
+    ...Array.from(aree).sort((a, b) => a.localeCompare(b)),
+  ];
 }
 
-export function buildMailto(tesiItem) {
-  const subject = `Candidatura tesi: ${tesiItem.titolo}`;
+export function buildMailto(tesiItem, lang = "it") {
+  // Titolo corretto nella lingua selezionata
+  const titolo = tr(tesiItem.titolo, lang);
+
+  // Supporta sia il nuovo formato con più docenti
+  // sia il vecchio formato con un solo docente
+  const docenti =
+    Array.isArray(tesiItem.docenti) && tesiItem.docenti.length > 0
+      ? tesiItem.docenti
+      : tesiItem.docenteNome
+        ? [
+            {
+              nome: tesiItem.docenteNome,
+              email: tesiItem.docenteEmail,
+            },
+          ]
+        : [];
+
+  // Tutte le email dei docenti
+  const emails = docenti
+    .map((docente) => docente.email)
+    .filter(Boolean);
+
+  // Tutti i nomi dei docenti
+  const nomi = docenti
+    .map((docente) => docente.nome)
+    .filter(Boolean);
+
+  const nomiItaliano =
+    nomi.length > 0
+      ? nomi.join(" e ")
+      : "Docenti";
+
+  const nomiInglese =
+    nomi.length > 0
+      ? nomi.join(" and ")
+      : "Professors";
+
+  const subject = `Candidatura tesi: ${titolo}`;
+
   const body = [
     `### ITALIANO ###`,
     ``,
-    `Gentile ${tesiItem.docenteNome},`,
+    `Gentili ${nomiItaliano},`,
     ``,
     `mi chiamo [NOME COGNOME] e vorrei candidarmi alla tesi:`,
-    `"${tesiItem.titolo}" (ID: ${tesiItem.id}).`,
+    `"${titolo}" (ID: ${tesiItem.id}).`,
     ``,
     `Dati:`,
     `- Corso di studi: [...]`,
@@ -51,10 +93,10 @@ export function buildMailto(tesiItem) {
     ``,
     `### ENGLISH ###`,
     ``,
-    `Dear ${tesiItem.docenteNome},`,
+    `Dear ${nomiInglese},`,
     ``,
     `My name is [NAME LASTNAME] and I would like to apply for the thesis:`,
-    `"${tesiItem.titolo}" (ID: ${tesiItem.id}).`,
+    `"${titolo}" (ID: ${tesiItem.id}).`,
     ``,
     `Data:`,
     `- Course of study: [...]`,
@@ -69,8 +111,10 @@ export function buildMailto(tesiItem) {
     `Availability for a colloquium: [...]`,
     ``,
     `Thank you,`,
-    `[NAME LASTNAME]`
+    `[NAME LASTNAME]`,
   ].join("\n");
 
-  return `mailto:${encodeURIComponent(tesiItem.docenteEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return `mailto:${emails.join(",")}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
 }
