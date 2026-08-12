@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState, useEffect } from "react";
 import { getAllTesi, getUniqueAree, buildMailto } from "@/lib/tesi";
 
@@ -68,24 +69,32 @@ export default function TesiListPage() {
   }, [all, q, area, lang, defaultArea]);
 
   return (
-    <div>
-      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            {lang === "en" ? "Thesis opportunities" : "Proposte di tesi"}
-          </h1>
-          <p className="mt-1 text-sm text-slate-300">
-            {lang === "en"
-              ? "Filter and search. To apply, use “Apply via email”."
-              : "Filtra e cerca. Per candidarti, usa “Candidati via email”."}
-          </p>
-        </div>
+    <div className="mx-auto max-w-6xl px-4 py-10">
 
-        <div className="flex flex-col gap-3 md:flex-row md:items-center">
+      <Link
+        href={`/?lang=${lang}`}
+        className="text-sm text-slate-300 transition-colors hover:text-white"
+      >
+        ← {lang === "en" ? "Back to home" : "Torna alla home"}
+      </Link>
+
+      <div className="mt-8">
+        <h1 className="text-3xl font-semibold tracking-tight">
+          {lang === "en" ? "Thesis opportunities" : "Proposte di tesi"}
+        </h1>
+
+        <p className="mt-2 text-sm text-slate-300">
+          {lang === "en"
+            ? "Filter and search. To apply, use “Apply via email”."
+            : "Filtra e cerca. Per candidarti, usa “Candidati via email”."}
+        </p>
+
+        <div className="mt-6 flex flex-col gap-3 md:flex-row md:items-center">
           <div className="w-full md:w-80">
             <label className="text-xs text-slate-400">
               {lang === "en" ? "Search" : "Ricerca"}
             </label>
+
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
@@ -100,6 +109,7 @@ export default function TesiListPage() {
 
           <div className="w-full md:w-56">
             <label className="text-xs text-slate-400">Area</label>
+
             <select
               value={area}
               onChange={(e) => setArea(e.target.value)}
