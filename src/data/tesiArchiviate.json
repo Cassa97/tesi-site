@@ -1,0 +1,55 @@
+[
+  {
+    "id": "thesis-2025-001",
+    "stato": "archiviata",
+
+    "origine": "catalogo",
+    "topicId": "ifc5-001",
+
+    "titolo": {
+      "it": "Titolo di esempio della tesi",
+      "en": "Example Thesis Title"
+    },
+
+    "area": {
+      "it": "BIM / IFC / Digital Construction",
+      "en": "BIM / IFC / Digital Construction"
+    },
+
+    "studente": {
+      "nome": "Nome Cognome"
+    },
+
+    "anno": 2025,
+
+    "dataInizio": "2025-01-15",
+    "dataFine": "2025-10-20",
+
+    "abstract": {
+      "it": "Breve descrizione dei risultati e delle attività sviluppate durante la tesi.",
+      "en": "Short description of the results and activities developed during the thesis."
+    },
+
+    "tags": [
+      "BIM",
+      "IFC",
+      "Digital Construction"
+    ],
+
+    "docenti": [
+      {
+        "nome": "Prof. Alberto Pavan"
+      },
+      {
+        "nome": "Jacopo Cassandro"
+      }
+    ],
+
+    "links": {
+      "tesi": "",
+      "repository": "",
+      "pubblicazione": "",
+      "dataset": ""
+    }
+  }
+]
