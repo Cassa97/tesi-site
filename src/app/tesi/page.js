@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { getAllTesi, getUniqueAree, buildMailto } from "@/lib/tesi";
 
@@ -16,7 +16,7 @@ function trList(value, lang = "it") {
   return value[lang] || value.it || [];
 }
 
-function TesiListContent() {
+export default function TesiListPage() {
   const searchParams = useSearchParams();
   const lang = searchParams.get("lang") === "en" ? "en" : "it";
 
@@ -201,13 +201,5 @@ function TesiListContent() {
         </div>
       )}
     </div>
-  );
-}
-
-export default function TesiListPage() {
-  return (
-    <Suspense fallback={null}>
-      <TesiListContent />
-    </Suspense>
   );
 }
