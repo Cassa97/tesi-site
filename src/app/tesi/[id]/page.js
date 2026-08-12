@@ -49,6 +49,18 @@ export default async function TesiDetailPage({ params }) {
   const requisiti = trList(t.requisiti, lang);
   const modalita = tr(t.modalita, lang);
 
+  const docenti =
+    Array.isArray(t.docenti) && t.docenti.length > 0
+      ? t.docenti
+      : t.docenteNome
+        ? [
+            {
+              nome: t.docenteNome,
+              email: t.docenteEmail,
+            },
+          ]
+        : [];
+
   return (
     <div>
       <Link
@@ -101,11 +113,27 @@ export default async function TesiDetailPage({ params }) {
 
           <div className="rounded-3xl border border-white/10 bg-slate-950/40 p-5">
             <h2 className="text-sm font-semibold text-white">{tText.contacts}</h2>
-            <div className="mt-3 text-sm text-slate-200">
-              <div className="text-slate-300">{tText.teacher}</div>
-              <div className="font-semibold">{t.docenteNome}</div>
-              <div className="mt-1 text-slate-300">{tText.email}</div>
-              <div className="break-all">{t.docenteEmail}</div>
+            <div className="mt-3 space-y-4 text-sm text-slate-200">
+              {docenti.length > 0 ? (
+                docenti.map((docente) => (
+                  <div key={docente.email || docente.nome}>
+                    <div className="font-semibold">
+                      {docente.nome}
+                    </div>
+
+                    {docente.email && (
+                      <a
+                        href={`mailto:${docente.email}`}
+                        className="mt-1 block break-all text-slate-300 hover:text-white"
+                      >
+                        {docente.email}
+                      </a>
+                    )}
+                  </div>
+                ))
+              ) : (
+                <div className="text-slate-400">—</div>
+              )}
             </div>
 
             <div className="mt-5">

@@ -42,6 +42,9 @@ export default function TesiListPage() {
       const descrizioneCompleta = tr(t.descrizioneCompleta, lang);
       const modalita = tr(t.modalita, lang);
       const requisiti = trList(t.requisiti, lang);
+      const docentiText = Array.isArray(t.docenti)
+        ? t.docenti.map((d) => `${d.nome || ""} ${d.email || ""}`)
+        : [t.docenteNome || "", t.docenteEmail || ""];
 
       const matchArea = area === defaultArea || areaValue === area;
 
@@ -53,7 +56,8 @@ export default function TesiListPage() {
         descrizioneCompleta,
         modalita,
         ...(t.tags || []),
-        ...requisiti
+        ...requisiti,
+        ...docentiText
       ]
         .join(" ")
         .toLowerCase();
@@ -121,6 +125,18 @@ export default function TesiListPage() {
           const modalita = tr(t.modalita, lang);
           const requisiti = trList(t.requisiti, lang);
 
+          const docenti =
+            Array.isArray(t.docenti) && t.docenti.length > 0
+              ? t.docenti
+              : t.docenteNome
+                ? [
+                    {
+                      nome: t.docenteNome,
+                      email: t.docenteEmail,
+                    },
+                  ]
+                : [];
+
           return (
             <div
               key={t.id}
@@ -186,7 +202,27 @@ export default function TesiListPage() {
               </div>
 
               <div className="mt-4 text-xs text-slate-400">
-                {lang === "en" ? "Contact" : "Contatto"}: {t.docenteNome} — {t.docenteEmail}
+                <span>{lang === "en" ? "Contacts" : "Contatti"}: </span>
+
+                {docenti.length > 0 ? (
+                  docenti.map((docente, index) => (
+                    <span key={docente.email || docente.nome}>
+                      {index > 0 && " • "}
+                      {docente.email ? (
+                        <a
+                          href={`mailto:${docente.email}`}
+                          className="text-slate-300 hover:text-white"
+                        >
+                          {docente.nome}
+                        </a>
+                      ) : (
+                        docente.nome
+                      )}
+                    </span>
+                  ))
+                ) : (
+                  "—"
+                )}
               </div>
             </div>
           );
