@@ -1,37 +1,62 @@
 [
   {
     "id": "ai-001",
+
     "titolo": {
-      "it": "Analisi di testi con NLP per supporto alla didattica",
-      "en": "Text analysis with NLP for educational support"
+      "it": "Traduzione automatica di voci di prezzo da linguaggio naturale a ontologie mediante Large Language Models (LLM)",
+      "en": "Automatic Translation of Cost Items from Natural Language to Ontologies using Large Language Models (LLM)"
     },
+
     "area": {
-      "it": "AI / NLP",
-      "en": "AI / NLP"
+      "it": "AI / NLP / Ontologie",
+      "en": "AI / NLP / Ontologies"
     },
+
     "livello": {
-      "it": "Triennale o Magistrale",
-      "en": "Bachelor or Master"
+      "it": "Magistrale",
+      "en": "Master"
     },
-    "tags": ["NLP", "Python", "LLM"],
+
+    "tags": ["LLM", "NLP", "Ontologie", "Knowledge Graph", "Python"],
+
     "descrizioneBreve": {
-      "it": "Progetto su classificazione e riassunto di documenti con tecniche NLP moderne.",
-      "en": "Project on document classification and summarization using modern NLP techniques."
+      "it": "Sviluppo di metodi per tradurre automaticamente descrizioni di voci di prezzo espresse in linguaggio naturale in rappresentazioni strutturate basate sull'ontologia :ci.",
+      "en": "Development of methods to automatically translate cost item descriptions expressed in natural language into structured representations based on the :ci ontology."
     },
+
     "descrizioneCompleta": {
-      "it": "Obiettivo: esplorare tecniche NLP per organizzare, classificare e riassumere testi. Output: prototipo software, confronto tra approcci e breve report finale.",
-      "en": "Goal: explore NLP techniques to organize, classify, and summarize texts. Output: software prototype, comparison of approaches, and a short final report."
+      "it": "L'obiettivo della tesi è sviluppare e valutare un sistema per la traduzione automatica di descrizioni testuali di voci di prezzo in una rappresentazione strutturata conforme all'ontologia :ci (Cost Item Ontology). Il lavoro prevede l'analisi di approcci basati su Large Language Models, tecniche NLP e metodi alternativi di information extraction e semantic parsing. Il sistema dovrà identificare all'interno delle descrizioni gli elementi semanticamente rilevanti e mapparli sulle classi e proprietà definite nell'ontologia. Saranno confrontate diverse strategie, ad esempio prompting, structured output, retrieval-augmented generation e modelli NLP dedicati. L'output finale comprenderà un prototipo software e una valutazione quantitativa e qualitativa dell'accuratezza della traduzione dal linguaggio naturale alla rappresentazione ontologica.",
+      "en": "The goal of the thesis is to develop and evaluate a system for the automatic translation of textual cost item descriptions into a structured representation compliant with the :ci Cost Item Ontology. The work will investigate approaches based on Large Language Models, NLP techniques, and alternative information extraction and semantic parsing methods. The system will identify semantically relevant information within natural-language descriptions and map it to the classes and properties defined in the ontology. Different strategies may be compared, including prompting, structured output, retrieval-augmented generation, and dedicated NLP models. The final output will include a software prototype and a quantitative and qualitative evaluation of the accuracy of the translation from natural language to the ontological representation."
     },
+
     "requisiti": {
-      "it": ["Python base", "Interesse per AI/NLP"],
-      "en": ["Basic Python", "Interest in AI/NLP"]
+      "it": [
+        "Conoscenze di base di Python",
+        "Interesse per Large Language Models e NLP",
+        "Interesse per ontologie e rappresentazione strutturata della conoscenza"
+      ],
+      "en": [
+        "Basic knowledge of Python",
+        "Interest in Large Language Models and NLP",
+        "Interest in ontologies and structured knowledge representation"
+      ]
     },
+
     "modalita": {
-      "it": "Tesi sperimentale con prototipo software",
-      "en": "Experimental thesis with software prototype"
+      "it": "Tesi sperimentale con sviluppo e validazione di un prototipo software",
+      "en": "Experimental thesis involving the development and validation of a software prototype"
     },
-    "docenteNome": "Prof. Rossi",
-    "docenteEmail": "prof.rossi@univ.it"
+
+    "docenti": [
+      {
+        "nome": "Prof. Alberto Pavan",
+        "email": "alberto.pavan@polimi.it"
+      },
+      {
+        "nome": "Dr.-Ing.Jacopo Cassandro",
+        "email": "jacopo.cassandro@polimi.it"
+      }
+    ]
   },
   {
     "id": "web-002",
