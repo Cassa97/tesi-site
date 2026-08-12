@@ -30,6 +30,13 @@ export default function Footer() {
             {lang === "en" ? "Research Group" : "Gruppo di ricerca"}
           </Link>
 
+          <Link
+            href={`/archivio?lang=${lang}`}
+            className="transition-colors hover:text-white"
+          >
+            {lang === "en" ? "Completed theses" : "Tesi svolte"}
+          </Link>
+
           <a
             href="https://github.com/Cassa97/tesi-site/blob/main/LICENSE"
             target="_blank"
