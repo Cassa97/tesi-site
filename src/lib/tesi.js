@@ -114,7 +114,7 @@ export function buildMailto(tesiItem, lang = "it") {
     `[NAME LASTNAME]`,
   ].join("\n");
 
-  return `mailto:${emails.join(",")}?subject=${encodeURIComponent(
+  return `mailto:${emails.join(";")}?subject=${encodeURIComponent(
     subject
   )}&body=${encodeURIComponent(body)}`;
 }
