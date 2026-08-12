@@ -142,7 +142,6 @@ Main research areas include:
 - Software engineering for engineering applications  
 - User-centered interface design and data visualization  
 
----
 
 ### 🧩 Core Skills & Expertise
 
