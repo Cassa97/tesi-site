@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import { getAllTesi, getUniqueAree, buildMailto } from "@/lib/tesi";
 
 function tr(value, lang = "it") {
@@ -17,19 +16,20 @@ function trList(value, lang = "it") {
 }
 
 export default function TesiListPage() {
-  const searchParams = useSearchParams();
-  const lang = searchParams.get("lang") === "en" ? "en" : "it";
+  const [lang, setLang] = useState("it");
+  const [q, setQ] = useState("");
+  const [area, setArea] = useState("Tutte");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const currentLang = params.get("lang") === "en" ? "en" : "it";
+    setLang(currentLang);
+    setArea(currentLang === "en" ? "All" : "Tutte");
+  }, []);
 
   const all = getAllTesi();
   const aree = getUniqueAree(lang);
-
-  const [q, setQ] = useState("");
   const defaultArea = lang === "en" ? "All" : "Tutte";
-  const [area, setArea] = useState(defaultArea);
-
-  useEffect(() => {
-    setArea(defaultArea);
-  }, [defaultArea]);
 
   const filtered = useMemo(() => {
     const query = q.trim().toLowerCase();

@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+
+const BASE_PATH = "/tesi-site";
 
 function buildProposalMailto(lang = "it") {
-  const subject =
-    lang === "en" ? "Thesis proposal" : "Proposta tesi";
+  const subject = lang === "en" ? "Thesis proposal" : "Proposta tesi";
 
   const body =
     lang === "en"
@@ -62,17 +62,34 @@ function buildProposalMailto(lang = "it") {
 }
 
 export default function Header() {
-  const searchParams = useSearchParams();
-  const lang = searchParams.get("lang") === "en" ? "en" : "it";
+  const [lang, setLang] = useState("it");
+  const [currentPath, setCurrentPath] = useState(`${BASE_PATH}/`);
+  const [currentSearch, setCurrentSearch] = useState("");
 
-  const homeHref = `/?lang=${lang}`;
-  const thesisHref = `/tesi?lang=${lang}`;
+  useEffect(() => {
+    const updateFromUrl = () => {
+      const path = window.location.pathname || `${BASE_PATH}/`;
+      const search = window.location.search || "";
+      const params = new URLSearchParams(search);
+
+      setCurrentPath(path);
+      setCurrentSearch(search);
+      setLang(params.get("lang") === "en" ? "en" : "it");
+    };
+
+    updateFromUrl();
+    window.addEventListener("popstate", updateFromUrl);
+    return () => window.removeEventListener("popstate", updateFromUrl);
+  }, []);
 
   const siteTitle =
-    lang === "en" ? "Thesis Opportunities" : "Proposte di Tesi";
-
+    lang === "en"
+      ? "Thesis Opportunities - Research Group"
+      : "Proposte di tesi - Gruppo di ricerca";
   const siteSubtitle =
-    lang === "en" ? "public catalog" : "catalogo pubblico";
+    lang === "en"
+      ? "Prof. Pavan, Prof. Mirarchi, Dr.-Ing. Cassandro (DABC, Politecnico di Milano)"
+      : "Prof. Pavan, Prof. Mirarchi, Dr.-Ing. Cassandro (DABC, Politecnico di Milano)";
 
   const thesisLabel =
     lang === "en" ? "Thesis list" : "Lista tesi";
@@ -80,12 +97,31 @@ export default function Header() {
   const proposeLabel =
     lang === "en" ? "Propose your topic" : "Proponi il tuo tema";
 
+  const homeHref = `${BASE_PATH}/?lang=${lang}`;
+  const thesisHref = `${BASE_PATH}/tesi?lang=${lang}`;
+
+  const buildLangHref = useMemo(() => {
+    return (targetLang) => {
+      const params = new URLSearchParams(currentSearch);
+      params.set("lang", targetLang);
+      const query = params.toString();
+      return `${currentPath}${query ? `?${query}` : ""}`;
+    };
+  }, [currentPath, currentSearch]);
+
+  const switchToIt = buildLangHref("it");
+  const switchToEn = buildLangHref("en");
+
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <Link href={homeHref} className="no-underline">
+        <a href={homeHref} className="no-underline">
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-indigo-400 to-fuchsia-400" />
+            <img
+              src={`${BASE_PATH}/Bandiera_Bianco.png`}
+              alt="Politecnico di Milano"
+              className="h-16 w-auto"
+            />
             <div>
               <div className="text-sm font-semibold leading-tight">
                 {siteTitle}
@@ -93,16 +129,16 @@ export default function Header() {
               <div className="text-xs text-slate-300">{siteSubtitle}</div>
             </div>
           </div>
-        </Link>
+        </a>
 
         <div className="flex items-center gap-3">
           <nav className="flex items-center gap-3 text-sm">
-            <Link
+            <a
               className="no-underline text-slate-200 hover:text-white"
               href={thesisHref}
             >
               {thesisLabel}
-            </Link>
+            </a>
 
             <a
               href={buildProposalMailto(lang)}
@@ -113,8 +149,8 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-1 rounded-xl border border-white/10 bg-white/5 p-1">
-            <Link
-              href="/?lang=it"
+            <a
+              href={switchToIt}
               className={`rounded-lg px-3 py-1 text-xs font-semibold no-underline ${
                 lang === "it"
                   ? "bg-white text-slate-950"
@@ -122,10 +158,10 @@ export default function Header() {
               }`}
             >
               IT
-            </Link>
+            </a>
 
-            <Link
-              href="/?lang=en"
+            <a
+              href={switchToEn}
               className={`rounded-lg px-3 py-1 text-xs font-semibold no-underline ${
                 lang === "en"
                   ? "bg-white text-slate-950"
@@ -133,7 +169,7 @@ export default function Header() {
               }`}
             >
               EN
-            </Link>
+            </a>
           </div>
         </div>
       </div>
